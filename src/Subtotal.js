@@ -2,6 +2,7 @@ import React from 'react'
 import "./Subtotal.css"
 import CurrencyFormat from 'react-currency-format'
 import { useSateValue } from './StateProvider';
+import { getBasketTotal } from './reducer';
 
 function Subtotal() {
     const [{ basket }, dispatch] = useSateValue(); 
@@ -20,9 +21,7 @@ function Subtotal() {
                 </>
             )}
             decimalScale={2}
-            value={basket.reduce((acum, item)=>{
-                return acum + item.price
-            }, 0)}
+            value={getBasketTotal(basket)}
             displayType={"text"}
             thousandSeparator={true}
             prefix={"$"}

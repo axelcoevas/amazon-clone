@@ -38,14 +38,14 @@ function Payment() {
 
     console.log('THE SECRET IS >>>', clientSecret);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (event) => {
         // All do fancy stripe things
-        e.preventDefault();
+        event.preventDefault();
         setProcessing(true);
 
         const payload = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
-                card: elements.getElement(CardElement),
+                card: elements.getElement(CardElement)
             }
         }).then(({ paymentIntent }) => {
             //  Payment Intend = Payment Confirmation.
@@ -72,9 +72,9 @@ function Payment() {
         })
     }
 
-    const handleChange = e => {
-        setDisabled(e.empty);
-        setError(e.error ? e.error.message : '');
+    const handleChange = event => {
+        setDisabled(event.empty);
+        setError(event.error ? event.error.message : '');
     }
 
     return (
@@ -116,7 +116,7 @@ function Payment() {
                     <div className="payment__title">
                         <h3>Payment Method</h3>
                     </div>
-                    <div className="payment__title">
+                    <div className="payment__details">
                         {/*Stripe magic happens here*/}
                         <form onSubmit={handleSubmit}>
                             <CardElement onChange={handleChange}/>

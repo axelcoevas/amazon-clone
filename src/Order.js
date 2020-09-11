@@ -2,7 +2,7 @@ import React from 'react';
 import './Order.css';
 import CurrencyFormat from 'react-currency-format';
 import CheckoutProduct from './CheckoutProduct';
-import { moment } from 'moment';
+import moment from 'moment';
 
 function Order({ order }) {
     return (
@@ -19,6 +19,7 @@ function Order({ order }) {
                         title={item.title}
                         price={item.price}
                         rating={item.rating}
+                        hideButton={true}
                     />     
                 )}
             <CurrencyFormat 
@@ -28,7 +29,7 @@ function Order({ order }) {
                 </>
             )}
             decimalScale={2}
-            value={order.data.order.amount / 100}
+            value={order.data.amount / 100}
             displayType={"text"}
             thousandSeparator={true}
             prefix={"$"}
